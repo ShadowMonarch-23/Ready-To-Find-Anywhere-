@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ready To Find Here</title>
 
   <!-- SEO Meta Tags -->
@@ -13,7 +13,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2T91XQ8C1K"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-2T91XQ8C1K');
   </script>
@@ -25,392 +25,92 @@
 </head>
 
   <style>
+/* --- page layout --- */
 body {
-font-family: 'Roboto', sans-serif;
-background-color: #2c2c2c;
-color: #fff;
-margin: 0;
-padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-flex-direction: column;
-backdrop-filter: blur(8px);
-background: rgba(0,0,0,0.6);
-user-select: none;
-overflow-y: auto;
--webkit-overflow-scrolling: touch;
-}
-h1 {
-font-family: 'Poppins', sans-serif;
-color: #fff;
-text-align: center;
-font-size: 2.5rem;
-margin-bottom: 20px;
-text-shadow: 3px 3px 15px rgba(0,0,0,0.5);
-}
-#welcomeMessage {
-font-family: 'Great Vibes', cursive;
-color: #fff;
-font-size: 3rem;
-margin-bottom: 20px;
-text-align: center;
-}
-./* Main page container */
-.container {
-width: 100%;
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-flex-direction: column;
-
-padding: 20px;
-
+  font-family: 'Roboto', sans-serif;
+  background-color: #2c2c2c;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.6);
+  /* make the page non-selectable by default */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Login container */
-
-.login-container {
-
-background: rgba(45, 45, 45, 0.9);
-
-backdrop-filter: blur(12px);
-
-border-radius: 16px;
-
-box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-
-padding: 40px 30px 50px;
-
-text-align: center;
-
-width: 100%;
-
-max-width: 420px;
-
-transition: all 0.3s ease;
-
-animation: fadeIn 0.8s ease-out;
-
-}
-
-.login-container:hover {
-
-transform: translateY(-3px);
-
-box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
-
-}
-
-/* Heading */
-
-.login-container h1 {
-
-font-family: 'Poppins', sans-serif;
-
-font-size: 2rem;
-
-margin-bottom: 25px;
-
-color: #ffffff;
-
-letter-spacing: 1px;
-
-text-shadow: 0 0 8px rgba(0, 255, 100, 0.4);
-
-}
-
-/* Input fields */
-
-.inputField {
-
-width: 100%;
-
-padding: 14px;
-
-margin: 10px 0;
-
-border-radius: 8px;
-
-border: none;
-
-background-color: #333;
-
-color: white;
-
-font-size: 1rem;
-
-transition: all 0.3s ease;
-
-}
-
-.inputField:focus {
-
-outline: none;
-
-background-color: #444;
-
-box-shadow: 0 0 8px rgba(52, 152, 219, 0.6);
-
-}
-
-/* Login button */
-
-.loginButton {
-
-width: 100%;
-
-padding: 14px;
-
-margin-top: 15px;
-
-background: linear-gradient(135deg, #3cba54, #2c8e41);
-
-border: none;
-
-color: white;
-
-font-size: 1.1rem;
-
-font-weight: 600;
-
-border-radius: 8px;
-
-cursor: pointer;
-
-transition: all 0.3s ease;
-
-}
-
-.loginButton:hover {
-
-transform: translateY(-2px);
-
-background: linear-gradient(135deg, #34a044, #256d33);
-
-}
-
-/* Countdown and messages */
-
-#loginMessage {
-
-display: none;
-
-color: #ff6060;
-
-font-size: 0.95rem;
-
-margin-top: 12px;
-
-}
-
-#timeoutMessage {
-
-color: #ff4c4c;
-
-margin-top: 8px;
-
-}
-
-#countdownDisplay {
-
-margin-top: 12px;
-
-font-weight: bold;
-
-color: #00ff9d;
-
-}
-
-/* Spinner */
-
-.spinner {
-
-border: 5px solid rgba(255,255,255,0.1);
-
-border-top: 5px solid #00bfff;
-
-border-radius: 50%;
-
-width: 45px;
-
-height: 45px;
-
-animation: spin 1s linear infinite;
-
-display: none;
-
-margin: 25px auto 0;
-
-}
-
-/* Smooth entry animation */
-
-@keyframes fadeIn {
-
-from { opacity: 0; transform: translateY(10px); }
-
-to { opacity: 1; transform: translateY(0); }
-
-}
-
-@keyframes spin {
-
-0% { transform: rotate(0deg); }
-
-100% { transform: rotate(360deg); }
-
-}
-
-.folder {
-
-background-color: #444;
-
-padding: 15px;
-
-margin: 10px 0;
-
-cursor: pointer;
-
-border-radius: 8px;
-
-font-weight: bold;
-
-transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-
-}
-
-.folder:hover {
-
-background-color: #555;
-
-transform: translateY(-3px);
-
-box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-
-}
-
-.subfolder {
-
-font-size: 0.95rem;
-
-padding: 10px 14px;
-
-margin: 5px 0 5px 35px;
-
-background-color: #333;
-
-border-radius: 8px;
-
-cursor: pointer;
-
-}
-
-.subfolder:hover {
-
-background-color: #444;
-
-transform: translateX(5px);
-
-}
-
+h1 { font-family: 'Poppins', sans-serif; color: #fff; text-align:center; font-size:2.5rem; margin-bottom:20px; text-shadow:3px 3px 15px rgba(0,0,0,0.5); }
+#welcomeMessage { font-family:'Great Vibes', cursive; color:#fff; font-size:3rem; margin-bottom:20px; text-align:center; }
+
+/* containers & form omitted for brevity in style structure - kept same as original */
+.container { width:100%; min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; padding:20px; }
+.login-container { background: rgba(45,45,45,0.9); backdrop-filter: blur(12px); border-radius:16px; box-shadow:0 10px 35px rgba(0,0,0,0.5); padding:40px 30px 50px; text-align:center; width:100%; max-width:420px; transition:all 0.3s ease; animation:fadeIn 0.8s ease-out; }
+.login-container:hover { transform: translateY(-3px); box-shadow:0 14px 40px rgba(0,0,0,0.6); }
+.login-container h1 { font-family:'Poppins', sans-serif; font-size:2rem; margin-bottom:25px; color:#ffffff; letter-spacing:1px; text-shadow:0 0 8px rgba(0,255,100,0.4); }
+.inputField { width:100%; padding:14px; margin:10px 0; border-radius:8px; border:none; background-color:#333; color:white; font-size:1rem; transition:all 0.3s ease; }
+.inputField:focus { outline:none; background-color:#444; box-shadow:0 0 8px rgba(52,152,219,0.6); }
+.loginButton { width:100%; padding:14px; margin-top:15px; background:linear-gradient(135deg,#3cba54,#2c8e41); border:none; color:white; font-size:1.1rem; font-weight:600; border-radius:8px; cursor:pointer; transition:all 0.3s ease; }
+.loginButton:hover { transform: translateY(-2px); background:linear-gradient(135deg,#34a044,#256d33); }
+#loginMessage { display:none; color:#ff6060; font-size:0.95rem; margin-top:12px; }
+#timeoutMessage { color:#ff4c4c; margin-top:8px; }
+#countdownDisplay { margin-top:12px; font-weight:bold; color:#00ff9d; }
+.spinner { border:5px solid rgba(255,255,255,0.1); border-top:5px solid #00bfff; border-radius:50%; width:45px; height:45px; animation:spin 1s linear infinite; display:none; margin:25px auto 0; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spin { 0% { transform:rotate(0deg);} 100% { transform:rotate(360deg);} }
+
+.folder { background-color:#444; padding:15px; margin:10px 0; cursor:pointer; border-radius:8px; font-weight:bold; transition:background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+.folder:hover { background-color:#555; transform: translateY(-3px); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+
+.subfolder { font-size:0.95rem; padding:10px 14px; margin:5px 0 5px 35px; background-color:#333; border-radius:8px; cursor:pointer; }
+.subfolder:hover { background-color:#444; transform: translateX(5px); }
+
+/* drive link appearance remains clickable, but we remove native drag/select behavior below in JS/CSS */
 .drive-links a {
+  background-color:#333;
+  padding:14px;
+  margin:5px 0;
+  border-radius:8px;
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.drive-links a:hover { background-color:#444; transform: translateY(-3px); }
 
-background-color: #333;
-
-padding: 14px;
-
-margin: 5px 0;
-
-border-radius: 8px;
-
-display: block;
-
-color: #fff;
-
-text-decoration: none;
-
-transition: background-color 0.3s ease, transform 0.3s ease;
-
+/* Force anchors to be non-selectable and not draggable by default */
+.drive-links a,
+.drive-links .secure-link {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-user-drag: none !important;
+  cursor: pointer;
 }
 
-.drive-links a:hover {
-
-background-color: #444;
-
-transform: translateY(-3px);
-
+/* small screens */
+@media (max-width:600px) {
+  .container { width:95%; }
+  h1{ font-size:2rem; }
+  .folder{ font-size:0.9rem; }
+  body{ align-items:flex-start; }
 }
 
-footer {
+/* footer */
+footer { text-align:center; color:#fff; font-size:0.9rem; padding:10px; background-color:rgba(0,0,0,0.7); border-top:1px solid #fff; margin-top:20px; }
+#scrollToTopBtn { display:none; position:fixed; bottom:20px; right:20px; background-color:#fff; color:white; border:none; border-radius:5px; padding:10px; cursor:pointer; z-index:1000; }
+#scrollToTopBtn i { font-size:16px; }
 
-text-align: center;
-
-color: #fff;
-
-font-size: 0.9rem;
-
-padding: 10px;
-
-background-color: rgba(0,0,0,0.7);
-
-border-top: 1px solid #fff;
-
-margin-top: 20px;
-
-}
-
-#scrollToTopBtn {
-
-display: none;
-
-position: fixed;
-
-bottom: 20px;
-
-right: 20px;
-
-background-color: #fff;
-
-color: white;
-
-border: none;
-
-border-radius: 5px;
-
-padding: 10px;
-
-cursor: pointer;
-
-z-index: 1000;
-
-}
-
-#scrollToTopBtn i {
-
-font-size: 16px;
-
-}
-
-@media (max-width:600px){
-
-.container{width:95%;}
-
-h1{font-size:2rem;}
-
-.folder{font-size:0.9rem;}
-
-body{align-items:flex-start;}
-
-}
-
-</style>
+  </style>
 
 </head>
 
@@ -418,440 +118,326 @@ body{align-items:flex-start;}
 
 <div class="container">
 
-<div id="loginSection" class="login-container">
-
-<h1>Ready To Find Here</h1>
-
-<form id="loginForm">
-
-<input type="email" id="username" class="inputField" placeholder="Enter your email" required>
-
-<input type="password" id="password" class="inputField" placeholder="Enter your password" required>
-
-<button type="submit" class="loginButton">Login</button>
-
-<div id="loginMessage">Invalid credentials, please try again.</div>
-
-<div id="timeoutMessage" style="color:red;display:none;">Time is up! No further attempts allowed.</div>
-
-<div id="countdownDisplay" style="margin-top:10px;font-weight:bold;">⏳ Time left: 30s</div>
-
-</form>
-
-<div id="loading" class="spinner"></div>
-
-</div>
-
-<div id="successSection" style="display:none;">
-
-<div id="welcomeMessage">Welcome Back, Mr. Viraj Rajendra Gite!</div>
-
-<div id="mainFolders">
-
-<!-- My Songs -->
-
-<div class="folder" ondblclick="toggleFolder('mysongsSubfolders')"><i class="fas fa-music"></i> My Songs</div>
-
-<div id="mysongsSubfolders" class="subfolder" style="display:none;">
-
-<div class="drive-links">
-
-<a href="https://drive.google.com/drive/folders/1-IXfN50_98z7UCfd6AuyvbluNYWCK8jy?usp=sharing"><i class="fas fa-headphones"></i> Music</a>
-
-<a href="https://drive.google.com/drive/folders/1RNmXHrgS5V_j9TsFKFC6rN5Rca3wIB__?usp=sharing"><i class="fas fa-volume-up"></i> Bgm</a>
-
-</div>
-
-</div>
-
-<!-- My Files -->
-
-<div class="folder" ondblclick="toggleFolder('myDriveSubfolders')"><i class="fa">&#xf07b;</i> My Files</div>
-
-<div id="myDriveSubfolders" class="subfolder" style="display:none;">
-
-<div class="drive-links">
-
-<a href="https://drive.google.com/drive/folders/1-wrFpLpvqZVeaSLi1NE9LkWmxWRM1Z-3?usp=sharing"><i class="fas fa-images"></i> C.V. Otur</a>
-
-<a href="https://drive.google.com/drive/folders/1T8JubDmOVCGtesj8PNx5hvEO1Th_cXS9?usp=sharing"><i class="fa">&#xf0c5;</i> Important</a>
-
-<a href="https://drive.google.com/drive/folders/14_AuX_uppE5GAaVUkxv2hQhqbVAoF5t8?usp=sharing"><i class="fas fa-images"></i> Tour</a>
-
-<a href="https://drive.google.com/drive/folders/1kdipLVB3HWPLgu57Vl4231SAc8IFvhq6?usp=sharing"><i class="fas fa-images"></i> My Family</a>
-
-<a href="https://drive.google.com/drive/mobile/folders/1cBvGNxPYZgQ1UlhfhcXDaRQRCu5lKejh"><i class="fa">&#xf02d;</i> Solo Leveling Manga</a>
-
-</div>
-
-</div>
-
-<!-- Telegram -->
-
-<div class="folder" ondblclick="window.open('https://web.telegram.org/k/#-1878181555', '_blank')">
-
-<i class="fab fa-telegram-plane"></i> Telegram
-
-</div>
-
-<!-- My Contacts -->
-
-<div class="folder" ondblclick="toggleFolder('mycontactsSubfolders')"><i class="fas fa-phone-alt"></i> My Contacts</div>
-
-<div id="mycontactsSubfolders" class="subfolder" style="display:none;">
-
-<!-- Friends Contacts -->
-
-<div class="folder" ondblclick="toggleFolder('myFriendsGroup')"><i class="fas fa-users"></i> My Friends Contacts</div>
-
-<div id="myFriendsGroup" class="subfolder" style="display:none;">
-
-<div class="folder" ondblclick="window.location.href='tel:+919699441487'"><i class="fas fa-phone"></i> Prajwal Sabale (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918805682739'"><i class="fas fa-phone"></i> Sarthak Khaire (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918208156651'"><i class="fas fa-phone"></i> Sarthak Tambe (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919552848541'"><i class="fas fa-phone"></i> Sahil Murade (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917517823092'"><i class="fas fa-phone"></i> Saiprit Murade (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919834971114'"><i class="fas fa-phone"></i> Swaraj Dhamale (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918888315305'"><i class="fas fa-phone"></i> Shreyash Dhokale (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919860246675'"><i class="fas fa-phone"></i> Soham Katore (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919822874809'"><i class="fas fa-phone"></i> Pratik Yadav (Home)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919359081125'"><i class="fas fa-phone"></i> Sahil Murade (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917498062804'"><i class="fas fa-phone"></i> Saiprit Murade (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919673846464'"><i class="fas fa-phone"></i> Sarthak Khaire (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917020327222'"><i class="fas fa-phone"></i> Niraj Adsare (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918010454207'"><i class="fas fa-phone"></i> Sarthak Tambe (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917498120117'"><i class="fas fa-phone"></i> Swaraj Dhamale (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918766548876'"><i class="fas fa-phone"></i> Shreyash Dhokale (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917709985353'"><i class="fas fa-phone"></i> Pratik Yadav (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917666856060'"><i class="fas fa-phone"></i> Chetan Sharma (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917350727827'"><i class="fas fa-phone"></i> Pranav Kotkar (Tab)</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919860404038'"><i class="fas fa-phone"></i> Ayan Shekh</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918888928287'"><i class="fas fa-phone"></i> Darshan More</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917558589878'"><i class="fas fa-phone"></i> Soham Katore</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919028832037'"><i class="fas fa-phone"></i> Shreyash Tambe</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917721927763'"><i class="fas fa-phone"></i> Krushna Phalake</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917709294046'"><i class="fas fa-phone"></i> Vinayak Dumbre</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917387598286'"><i class="fas fa-phone"></i> Jishan Momin</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919209228868'"><i class="fas fa-phone"></i> Shrivardhan Dumbre</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918149651383'"><i class="fas fa-phone"></i> Apurv Warule</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919028517280'"><i class="fas fa-phone"></i> Atharva Ghode</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919860354540'"><i class="fas fa-phone"></i> Mangesh Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919890922573'"><i class="fas fa-phone"></i> Amit Bhaskar</div>
-
-</div>
-
-<!-- Family Contacts -->
-
-<div class="folder" ondblclick="toggleFolder('myFamilyGroup')"><i class="fas fa-users-cog"></i> My Family Contacts</div>
-
-<div id="myFamilyGroup" class="subfolder" style="display:none;">
-
-<div class="folder" ondblclick="window.location.href='tel:+919890101845'"><i class="fas fa-phone"></i> Rajendra Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919404684107'"><i class="fas fa-phone"></i> Rajendra Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919405174315'"><i class="fas fa-phone"></i> Archana Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917756066502'"><i class="fas fa-phone"></i> Archana Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919890603513'"><i class="fas fa-phone"></i> Sandip Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919284120495'"><i class="fas fa-phone"></i> Viraj Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919075307107'"><i class="fas fa-phone"></i> Sayali Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919130383513'"><i class="fas fa-phone"></i> Sarthak Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919156000541'"><i class="fas fa-phone"></i> Sejal Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+917420993513'"><i class="fas fa-phone"></i> Saloni Bhujbal</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919421229915'"><i class="fas fa-phone"></i> Sarthak Gite 2</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919820163994'"><i class="fas fa-phone"></i> Ashish Shelar</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919890401450'"><i class="fas fa-phone"></i> Lalita Gite</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919892439254'"><i class="fas fa-phone"></i> Mangal Shelar</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919867963994'"><i class="fas fa-phone"></i> Baburao Shelar</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+918421171105'"><i class="fas fa-phone"></i> Asha Bhujbal</div>
-
-<div class="folder" ondblclick="window.location.href='tel:+919860224565'"><i class="fas fa-phone"></i> Rohidas Bhujbal</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+  <div id="loginSection" class="login-container">
+    <h1>Ready To Find Here</h1>
+    <form id="loginForm">
+      <input type="email" id="username" class="inputField" placeholder="Enter your email" required>
+      <input type="password" id="password" class="inputField" placeholder="Enter your password" required>
+      <button type="submit" class="loginButton">Login</button>
+      <div id="loginMessage">Invalid credentials, please try again.</div>
+      <div id="timeoutMessage" style="color:red;display:none;">Time is up! No further attempts allowed.</div>
+      <div id="countdownDisplay" style="margin-top:10px;font-weight:bold;">⏳ Time left: 30s</div>
+    </form>
+
+    <div id="loading" class="spinner"></div>
+  </div>
+
+  <div id="successSection" style="display:none;">
+    <div id="welcomeMessage">Welcome Back, Mr. Viraj Rajendra Gite!</div>
+
+    <div id="mainFolders">
+      <!-- My Songs -->
+      <div class="folder" ondblclick="toggleFolder('mysongsSubfolders')"><i class="fas fa-music"></i> My Songs</div>
+      <div id="mysongsSubfolders" class="subfolder" style="display:none;">
+        <div class="drive-links">
+          <!-- href removed and real url stored in data-url; link appearance preserved but native drag/copy disabled -->
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/1-IXfN50_98z7UCfd6AuyvbluNYWCK8jy?usp=sharing"><i class="fas fa-headphones"></i> Music</a>
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/1RNmXHrgS5V_j9TsFKFC6rN5Rca3wIB__?usp=sharing"><i class="fas fa-volume-up"></i> Bgm</a>
+        </div>
+      </div>
+
+      <!-- My Files -->
+      <div class="folder" ondblclick="toggleFolder('myDriveSubfolders')"><i class="fa">&#xf07b;</i> My Files</div>
+      <div id="myDriveSubfolders" class="subfolder" style="display:none;">
+        <div class="drive-links">
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/1-wrFpLpvqZVeaSLi1NE9LkWmxWRM1Z-3?usp=sharing"><i class="fas fa-images"></i> C.V. Otur</a>
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/1T8JubDmOVCGtesj8PNx5hvEO1Th_cXS9?usp=sharing"><i class="fa">&#xf0c5;</i> Important</a>
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/14_AuX_uppE5GAaVUkxv2hQhqbVAoF5t8?usp=sharing"><i class="fas fa-images"></i> Tour</a>
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/folders/1kdipLVB3HWPLgu57Vl4231SAc8IFvhq6?usp=sharing"><i class="fas fa-images"></i> My Family</a>
+          <a class="secure-link" href="#" data-url="https://drive.google.com/drive/mobile/folders/1cBvGNxPYZgQ1UlhfhcXDaRQRCu5lKejh"><i class="fa">&#xf02d;</i> Solo Leveling Manga</a>
+        </div>
+      </div>
+
+      <!-- Telegram -->
+      <div class="folder" ondblclick="window.open('https://web.telegram.org/k/#-1878181555', '_blank')">
+        <i class="fab fa-telegram-plane"></i> Telegram
+      </div>
+
+      <!-- My Contacts (phone links are triggered by ondblclick and remain unchanged) -->
+      <div class="folder" ondblclick="toggleFolder('mycontactsSubfolders')"><i class="fas fa-phone-alt"></i> My Contacts</div>
+      <div id="mycontactsSubfolders" class="subfolder" style="display:none;">
+        <!-- Friends Contacts -->
+        <div class="folder" ondblclick="toggleFolder('myFriendsGroup')"><i class="fas fa-users"></i> My Friends Contacts</div>
+        <div id="myFriendsGroup" class="subfolder" style="display:none;">
+          <div class="folder" ondblclick="window.location.href='tel:+919699441487'"><i class="fas fa-phone"></i> Prajwal Sabale (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918805682739'"><i class="fas fa-phone"></i> Sarthak Khaire (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918208156651'"><i class="fas fa-phone"></i> Sarthak Tambe (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919552848541'"><i class="fas fa-phone"></i> Sahil Murade (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917517823092'"><i class="fas fa-phone"></i> Saiprit Murade (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919834971114'"><i class="fas fa-phone"></i> Swaraj Dhamale (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918888315305'"><i class="fas fa-phone"></i> Shreyash Dhokale (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919860246675'"><i class="fas fa-phone"></i> Soham Katore (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919822874809'"><i class="fas fa-phone"></i> Pratik Yadav (Home)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919359081125'"><i class="fas fa-phone"></i> Sahil Murade (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917498062804'"><i class="fas fa-phone"></i> Saiprit Murade (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919673846464'"><i class="fas fa-phone"></i> Sarthak Khaire (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917020327222'"><i class="fas fa-phone"></i> Niraj Adsare (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918010454207'"><i class="fas fa-phone"></i> Sarthak Tambe (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917498120117'"><i class="fas fa-phone"></i> Swaraj Dhamale (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918766548876'"><i class="fas fa-phone"></i> Shreyash Dhokale (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917709985353'"><i class="fas fa-phone"></i> Pratik Yadav (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917666856060'"><i class="fas fa-phone"></i> Chetan Sharma (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917350727827'"><i class="fas fa-phone"></i> Pranav Kotkar (Tab)</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919860404038'"><i class="fas fa-phone"></i> Ayan Shekh</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918888928287'"><i class="fas fa-phone"></i> Darshan More</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917558589878'"><i class="fas fa-phone"></i> Soham Katore</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919028832037'"><i class="fas fa-phone"></i> Shreyash Tambe</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917721927763'"><i class="fas fa-phone"></i> Krushna Phalake</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917709294046'"><i class="fas fa-phone"></i> Vinayak Dumbre</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917387598286'"><i class="fas fa-phone"></i> Jishan Momin</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919209228868'"><i class="fas fa-phone"></i> Shrivardhan Dumbre</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918149651383'"><i class="fas fa-phone"></i> Apurv Warule</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919028517280'"><i class="fas fa-phone"></i> Atharva Ghode</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919860354540'"><i class="fas fa-phone"></i> Mangesh Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919890922573'"><i class="fas fa-phone"></i> Amit Bhaskar</div>
+        </div>
+
+        <!-- Family Contacts -->
+        <div class="folder" ondblclick="toggleFolder('myFamilyGroup')"><i class="fas fa-users-cog"></i> My Family Contacts</div>
+        <div id="myFamilyGroup" class="subfolder" style="display:none;">
+          <div class="folder" ondblclick="window.location.href='tel:+919890101845'"><i class="fas fa-phone"></i> Rajendra Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919404684107'"><i class="fas fa-phone"></i> Rajendra Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919405174315'"><i class="fas fa-phone"></i> Archana Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917756066502'"><i class="fas fa-phone"></i> Archana Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919890603513'"><i class="fas fa-phone"></i> Sandip Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919284120495'"><i class="fas fa-phone"></i> Viraj Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919075307107'"><i class="fas fa-phone"></i> Sayali Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919130383513'"><i class="fas fa-phone"></i> Sarthak Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919156000541'"><i class="fas fa-phone"></i> Sejal Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+917420993513'"><i class="fas fa-phone"></i> Saloni Bhujbal</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919421229915'"><i class="fas fa-phone"></i> Sarthak Gite 2</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919820163994'"><i class="fas fa-phone"></i> Ashish Shelar</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919890401450'"><i class="fas fa-phone"></i> Lalita Gite</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919892439254'"><i class="fas fa-phone"></i> Mangal Shelar</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919867963994'"><i class="fas fa-phone"></i> Baburao Shelar</div>
+          <div class="folder" ondblclick="window.location.href='tel:+918421171105'"><i class="fas fa-phone"></i> Asha Bhujbal</div>
+          <div class="folder" ondblclick="window.location.href='tel:+919860224565'"><i class="fas fa-phone"></i> Rohidas Bhujbal</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <button id="scrollToTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
-
 <footer><p>&copy; Created By Mr. Viraj Rajendra Gite. All Rights Reserved.</p></footer>
 
 <script>
-
 /* ================================
-
-LOGIN TIMER & COOLDOWN SYSTEM
-
-================================ */
-
+  LOGIN TIMER & COOLDOWN SYSTEM
+   (unchanged, same behavior as before)
+   ================================ */
 const form = document.getElementById('loginForm');
-
 const loginSection = document.getElementById('loginSection');
-
 const successSection = document.getElementById('successSection');
-
 const loginMessage = document.getElementById('loginMessage');
-
 const timeoutMessage = document.getElementById('timeoutMessage');
-
 const countdownDisplay = document.getElementById('countdownDisplay');
-
 const loading = document.getElementById('loading');
 
 const ATTEMPT_TIME = 30; // seconds per login attempt
-
 const COOLDOWN_TIME = 30 * 60; // 30 minutes in seconds
 
 let timerInterval;
-
 let remainingTime;
 
-/* --- Format time as mm:ss --- */
-
 const formatTime = (s) =>
-
-`${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
-
-/* --- Update countdown display --- */
+  `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
 
 function updateDisplay() {
-
-countdownDisplay.textContent =
-
-remainingTime > 0
-
-? `${remainingTime <= ATTEMPT_TIME ? "⏳ Time left" : "❌ Login disabled"}: ${formatTime(remainingTime)}`
-
-: "";
-
+  countdownDisplay.textContent =
+    remainingTime > 0
+      ? `${remainingTime <= ATTEMPT_TIME ? "⏳ Time left" : "❌ Login disabled"}: ${formatTime(remainingTime)}`
+      : "";
 }
-
-/* --- Start timer (either login attempt or cooldown) --- */
 
 function startTimer(seconds, isCooldown = false) {
-
-remainingTime = seconds;
-
-updateDisplay();
-
-clearInterval(timerInterval);
-
-timerInterval = setInterval(() => {
-
-remainingTime--;
-
-updateDisplay();
-
-if (remainingTime <= 0) {
-
-clearInterval(timerInterval);
-
-if (isCooldown) {
-
-// End cooldown → enable form again
-
-form.querySelectorAll('input, button').forEach(el => el.disabled = false);
-
-timeoutMessage.style.display = 'none';
-
-localStorage.removeItem('cooldownEnd');
-
-startTimer(ATTEMPT_TIME); // restart normal attempt timer
-
-} else {
-
-// Start cooldown
-
-triggerCooldown();
-
+  remainingTime = seconds;
+  updateDisplay();
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    remainingTime--;
+    updateDisplay();
+    if (remainingTime <= 0) {
+      clearInterval(timerInterval);
+      if (isCooldown) {
+        form.querySelectorAll('input, button').forEach(el => el.disabled = false);
+        timeoutMessage.style.display = 'none';
+        localStorage.removeItem('cooldownEnd');
+        startTimer(ATTEMPT_TIME);
+      } else {
+        triggerCooldown();
+      }
+    }
+  }, 1000);
 }
-
-}
-
-}, 1000);
-
-}
-
-/* --- Trigger cooldown --- */
 
 function triggerCooldown() {
-
-form.querySelectorAll('input, button').forEach(el => el.disabled = true);
-
-timeoutMessage.style.display = 'block';
-
-const cooldownEnd = Math.floor(Date.now() / 1000) + COOLDOWN_TIME;
-
-localStorage.setItem('cooldownEnd', cooldownEnd);
-
-startTimer(COOLDOWN_TIME, true);
-
+  form.querySelectorAll('input, button').forEach(el => el.disabled = true);
+  timeoutMessage.style.display = 'block';
+  const cooldownEnd = Math.floor(Date.now() / 1000) + COOLDOWN_TIME;
+  localStorage.setItem('cooldownEnd', cooldownEnd);
+  startTimer(COOLDOWN_TIME, true);
 }
-
-/* --- Initialize timer on page load --- */
 
 function initTimer() {
-
-const storedCooldown = localStorage.getItem('cooldownEnd');
-
-const now = Math.floor(Date.now() / 1000);
-
-if (storedCooldown && now < storedCooldown) {
-
-// 🚫 Disable form immediately before the timer starts
-
-form.querySelectorAll('input, button').forEach(el => el.disabled = true);
-
-timeoutMessage.style.display = 'block';
-
-// Start cooldown countdown
-
-startTimer(storedCooldown - now, true);
-
-} else {
-
-// No cooldown active
-
-localStorage.removeItem('cooldownEnd');
-
-startTimer(ATTEMPT_TIME);
-
+  const storedCooldown = localStorage.getItem('cooldownEnd');
+  const now = Math.floor(Date.now() / 1000);
+  if (storedCooldown && now < storedCooldown) {
+    form.querySelectorAll('input, button').forEach(el => el.disabled = true);
+    timeoutMessage.style.display = 'block';
+    startTimer(storedCooldown - now, true);
+  } else {
+    localStorage.removeItem('cooldownEnd');
+    startTimer(ATTEMPT_TIME);
+  }
 }
-
-}
-
-/* --- Login form submit handler --- */
 
 form.addEventListener('submit', e => {
-
-e.preventDefault();
-
-loading.style.display = 'block';
-
-loginMessage.style.display = 'none';
-
-setTimeout(() => {
-
-loading.style.display = 'none';
-
-const email = document.getElementById('username').value.trim();
-
-const password = document.getElementById('password').value.trim();
-
-if (email === "virajgite32@gmail.com" && password === "viraj@234632") {
-
-// Successful login
-
-loginSection.style.display = 'none';
-
-successSection.style.display = 'block';
-
-clearInterval(timerInterval);
-
-} else {
-
-// Invalid credentials
-
-loginMessage.style.display = 'block';
-
-}
-
-}, 1500);
-
+  e.preventDefault();
+  loading.style.display = 'block';
+  loginMessage.style.display = 'none';
+  setTimeout(() => {
+    loading.style.display = 'none';
+    const email = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if (email === "virajgite32@gmail.com" && password === "viraj@234632") {
+      loginSection.style.display = 'none';
+      successSection.style.display = 'block';
+      clearInterval(timerInterval);
+    } else {
+      loginMessage.style.display = 'block';
+    }
+  }, 1500);
 });
 
 /* ================================
+  UI HELPERS & LINK PROTECTION
+  ================================ */
 
-UI HELPERS & RESTRICTIONS
-
-================================ */
-
-// Scroll to top button
-
+// scroll to top
 const scrollBtn = document.getElementById('scrollToTopBtn');
-
 window.addEventListener('scroll', () => {
+  scrollBtn.style.display = (window.scrollY > 200) ? 'block' : 'none';
+});
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-scrollBtn.style.display = (window.scrollY > 200) ? 'block' : 'none';
+// folder toggle
+function toggleFolder(id) {
+  const el = document.getElementById(id);
+  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+}
 
+/* --- Restrictions: disable context menu & common copy shortcuts --- */
+document.addEventListener('contextmenu', e => {
+  // still allow context menu for devtools with shift+rightclick on some browsers,
+  // but block the usual right-click on page content
+  e.preventDefault();
+});
+document.addEventListener('keydown', e => {
+  // block Ctrl/Cmd + C / V / U / S etc for casual users
+  if ((e.ctrlKey || e.metaKey) && ['c','v','u','s','x','a'].includes(e.key.toLowerCase())) {
+    e.preventDefault();
+  }
 });
 
-function scrollToTop() {
+/* --- Link protection strategy:
+   - remove native href from links (kept as href="#") so they don't appear as draggable anchors
+   - real destination is stored in data-url attribute
+   - JS opens the destination on click/auxclick (middle-click)
+   - block dragstart on anchors, block selection & copy events on anchors
+   - IMPORTANT: this deters casual copying/dragging but cannot stop a determined user with devtools or server access.
+*/
+function protectLinks() {
+  document.querySelectorAll('.secure-link').forEach(a => {
+    // ensure anchor is not draggable and cannot be selected
+    a.draggable = false;
+    a.style.userSelect = 'none';
+    a.style.webkitUserSelect = 'none';
+    a.style.mozUserSelect = 'none';
+    a.style.msUserSelect = 'none';
 
-window.scrollTo({ top: 0, behavior: 'smooth' });
+    // open encoded destination on click (left click)
+    a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const dest = a.getAttribute('data-url');
+      if (!dest) return;
+      // open in a new tab (safest)
+      window.open(dest, '_blank', 'noopener,noreferrer');
+    });
 
+    // handle middle-click (auxclick) so users can still open in new tab
+    a.addEventListener('auxclick', (ev) => {
+      if (ev.button === 1) {
+        ev.preventDefault();
+        const dest = a.getAttribute('data-url');
+        if (!dest) return;
+        window.open(dest, '_blank', 'noopener,noreferrer');
+      }
+    });
+
+    // prevent dragstart originating from anchor
+    a.addEventListener('dragstart', (ev) => {
+      ev.preventDefault();
+    });
+
+    // block copy events on anchor
+    a.addEventListener('copy', (ev) => {
+      ev.preventDefault();
+    });
+
+    // block selecting text using mouse on anchor
+    a.addEventListener('selectstart', (ev) => {
+      ev.preventDefault();
+    });
+  });
+
+  // additionally: prevent dragging any element that contains a data-url
+  document.addEventListener('dragstart', (ev) => {
+    if (ev.target && ev.target.closest && ev.target.closest('.secure-link')) {
+      ev.preventDefault();
+    }
+  });
+
+  // block copy from page root (prevents Ctrl+C / selection-based copy)
+  document.addEventListener('copy', (ev) => {
+    // stop default copy if selection is non-empty and it's from within drive-links
+    // this is a blunt tool — it prevents normal copy on the page as well
+    ev.preventDefault();
+  });
 }
 
-// Folder visibility toggle
+/* --- Initialize protections after DOM ready --- */
+document.addEventListener('DOMContentLoaded', () => {
+  // protect links as soon as possible
+  protectLinks();
 
-function toggleFolder(id) {
-
-const el = document.getElementById(id);
-
-el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-
-}
-
-// Disable context menu and basic copy shortcuts (but not DevTools)
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-document.addEventListener('keydown', e => {
-
-if (e.ctrlKey && ['c', 'v', 'u'].includes(e.key.toLowerCase())) e.preventDefault();
-
+  // If you still had href attributes when authoring, make sure they are cleared to avoid browser showing them as drag targets
+  document.querySelectorAll('.secure-link').forEach(a => {
+    // Ensure href is inert (we keep an inert # to maintain accessibility and focusability)
+    a.setAttribute('href', '#');
+    a.setAttribute('role', 'link');
+    a.setAttribute('tabindex', '0');
+  });
 });
 
 /* --- Start timer after window fully loads --- */
-
 window.onload = initTimer;
 
-</script>  
+</script>
+
+</body>
+</html>

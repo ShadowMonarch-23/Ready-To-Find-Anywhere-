@@ -233,121 +233,11 @@ footer { text-align:center; color:#fff; font-size:0.9rem; padding:10px; backgrou
 <button id="scrollToTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
 <footer><p>&copy; Created By Mr. Viraj Rajendra Gite. All Rights Reserved.</p></footer>
 
-<script>
-/* ================================
-  LOGIN TIMER & COOLDOWN SYSTEM
-   (unchanged, same behavior as before)
-   ================================ */
-const form = document.getElementById('loginForm');
-const loginSection = document.getElementById('loginSection');
-const successSection = document.getElementById('successSection');
-const loginMessage = document.getElementById('loginMessage');
-const timeoutMessage = document.getElementById('timeoutMessage');
-const countdownDisplay = document.getElementById('countdownDisplay');
-const loading = document.getElementById('loading');
-
-const ATTEMPT_TIME = 30; // seconds per login attempt
-const COOLDOWN_TIME = 30 * 60; // 30 minutes in seconds
-
-let timerInterval;
-let remainingTime;
-
-const formatTime = (s) =>
-  `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
-
-function updateDisplay() {
-  countdownDisplay.textContent =
-    remainingTime > 0
-      ? `${remainingTime <= ATTEMPT_TIME ? "⏳ Time left" : "❌ Login disabled"}: ${formatTime(remainingTime)}`
-      : "";
-}
-
-function startTimer(seconds, isCooldown = false) {
-  remainingTime = seconds;
-  updateDisplay();
-  clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    remainingTime--;
-    updateDisplay();
-    if (remainingTime <= 0) {
-      clearInterval(timerInterval);
-      if (isCooldown) {
-        form.querySelectorAll('input, button').forEach(el => el.disabled = false);
-        timeoutMessage.style.display = 'none';
-        localStorage.removeItem('cooldownEnd');
-        startTimer(ATTEMPT_TIME);
-      } else {
-        triggerCooldown();
-      }
-    }
-  }, 1000);
-}
-
-function triggerCooldown() {
-  form.querySelectorAll('input, button').forEach(el => el.disabled = true);
-  timeoutMessage.style.display = 'block';
-  const cooldownEnd = Math.floor(Date.now() / 1000) + COOLDOWN_TIME;
-  localStorage.setItem('cooldownEnd', cooldownEnd);
-  startTimer(COOLDOWN_TIME, true);
-}
-
-function initTimer() {
-  const storedCooldown = localStorage.getItem('cooldownEnd');
-  const now = Math.floor(Date.now() / 1000);
-  if (storedCooldown && now < storedCooldown) {
-    form.querySelectorAll('input, button').forEach(el => el.disabled = true);
-    timeoutMessage.style.display = 'block';
-    startTimer(storedCooldown - now, true);
-  } else {
-    localStorage.removeItem('cooldownEnd');
-    startTimer(ATTEMPT_TIME);
-  }
-}
-
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  loading.style.display = 'block';
-  loginMessage.style.display = 'none';
-  setTimeout(() => {
-    loading.style.display = 'none';
-    const email = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value.trim();
-    if (email === "virajgite32@gmail.com" && password === "viraj@234632") {
-      loginSection.style.display = 'none';
-      successSection.style.display = 'block';
-      clearInterval(timerInterval);
-    } else {
-      loginMessage.style.display = 'block';
-    }
-  }, 1500);
-});
-
-/* ================================
-  UI HELPERS & LINK PROTECTION
-  ================================ */
-
-// scroll to top
-const scrollBtn = document.getElementById('scrollToTopBtn');
-window.addEventListener('scroll', () => {
-  scrollBtn.style.display = (window.scrollY > 200) ? 'block' : 'none';
-});
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// folder toggle
-function toggleFolder(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-}
-
-/* --- Restrictions: disable context menu & common copy shortcuts --- */
-document.addEventListener('contextmenu', e => {
-  // still allow context menu for devtools with shift+rightclick on some browsers,
-  // but block the usual right-click on page content
+  
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
 <script>
 /* ================================
    FIREBASE CONFIGURATION
@@ -356,7 +246,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDnT80NEyyLj-8PVfezTO77aVF8l-vmnkQ",
   authDomain: "ready-to-find-anywhere.firebaseapp.com",
   projectId: "ready-to-find-anywhere",
-  storageBucket: "ready-to-find-anywhere.firebasestorage.app",
+  storageBucket: "ready-to-find-anywhere.appspot.com",
   messagingSenderId: "619540868895",
   appId: "1:619540868895:web:a38f142e2e7f863ca14a2a",
   measurementId: "G-EMGZSCP8JR"

@@ -373,9 +373,13 @@ footer { text-align:center; color:#fff; font-size:0.9rem; padding:10px; backgrou
   }
 
   function toggleFolder(id) {
-    const el = document.getElementById(id);
-    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-  }
+  const el = document.getElementById(id);
+  if (!el) return; // Prevent errors if element doesn't exist
+
+  const isHidden = window.getComputedStyle(el).display === 'none';
+  el.style.display = isHidden ? 'block' : 'none';
+}
+
 
   document.addEventListener('contextmenu', e => e.preventDefault());
   document.addEventListener('keydown', e => {

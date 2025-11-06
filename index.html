@@ -238,184 +238,191 @@ footer { text-align:center; color:#fff; font-size:0.9rem; padding:10px; backgrou
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
 
-<script>
-/* ================================
-   FIREBASE CONFIGURATION
-   ================================ */
-const firebaseConfig = {
-  apiKey: "AIzaSyDnT80NEyyLj-8PVfezTO77aVF8l-vmnkQ",
-  authDomain: "ready-to-find-anywhere.firebaseapp.com",
-  projectId: "ready-to-find-anywhere",
-  storageBucket: "ready-to-find-anywhere.appspot.com",
-  messagingSenderId: "619540868895",
-  appId: "1:619540868895:web:a38f142e2e7f863ca14a2a",
-  measurementId: "G-EMGZSCP8JR"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+      <!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-/* ================================
-   LOGIN TIMER & COOLDOWN SYSTEM
-   ================================ */
-const form = document.getElementById('loginForm');
-const loginSection = document.getElementById('loginSection');
-const successSection = document.getElementById('successSection');
-const loginMessage = document.getElementById('loginMessage');
-const timeoutMessage = document.getElementById('timeoutMessage');
-const countdownDisplay = document.getElementById('countdownDisplay');
-const loading = document.getElementById('loading');
+  // ================================
+  // FIREBASE CONFIGURATION
+  // ================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyDnT80NEyyLj-8PVfezTO77aVF8l-vmnkQ",
+    authDomain: "ready-to-find-anywhere.firebaseapp.com",
+    projectId: "ready-to-find-anywhere",
+    storageBucket: "ready-to-find-anywhere.appspot.com",
+    messagingSenderId: "619540868895",
+    appId: "1:619540868895:web:a38f142e2e7f863ca14a2a",
+    measurementId: "G-EMGZSCP8JR"
+  };
 
-const ATTEMPT_TIME = 30;
-const COOLDOWN_TIME = 30 * 60;
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-let timerInterval;
-let remainingTime;
+  // ================================
+  // LOGIN TIMER & COOLDOWN SYSTEM
+  // ================================
+  const form = document.getElementById('loginForm');
+  const loginSection = document.getElementById('loginSection');
+  const successSection = document.getElementById('successSection');
+  const loginMessage = document.getElementById('loginMessage');
+  const timeoutMessage = document.getElementById('timeoutMessage');
+  const countdownDisplay = document.getElementById('countdownDisplay');
+  const loading = document.getElementById('loading');
 
-const formatTime = (s) =>
-  `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
+  const ATTEMPT_TIME = 30;
+  const COOLDOWN_TIME = 30 * 60;
 
-function updateDisplay() {
-  countdownDisplay.textContent =
-    remainingTime > 0
-      ? `${remainingTime <= ATTEMPT_TIME ? "⏳ Time left" : "❌ Login disabled"}: ${formatTime(remainingTime)}`
-      : "";
-}
+  let timerInterval;
+  let remainingTime;
 
-function startTimer(seconds, isCooldown = false) {
-  remainingTime = seconds;
-  updateDisplay();
-  clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    remainingTime--;
+  const formatTime = (s) =>
+    `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
+
+  function updateDisplay() {
+    countdownDisplay.textContent =
+      remainingTime > 0
+        ? `${remainingTime <= ATTEMPT_TIME ? "⏳ Time left" : "❌ Login disabled"}: ${formatTime(remainingTime)}`
+        : "";
+  }
+
+  function startTimer(seconds, isCooldown = false) {
+    remainingTime = seconds;
     updateDisplay();
-    if (remainingTime <= 0) {
-      clearInterval(timerInterval);
-      if (isCooldown) {
-        form.querySelectorAll('input, button').forEach(el => el.disabled = false);
-        timeoutMessage.style.display = 'none';
-        localStorage.removeItem('cooldownEnd');
-        startTimer(ATTEMPT_TIME);
-      } else {
-        triggerCooldown();
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      remainingTime--;
+      updateDisplay();
+      if (remainingTime <= 0) {
+        clearInterval(timerInterval);
+        if (isCooldown) {
+          form.querySelectorAll('input, button').forEach(el => el.disabled = false);
+          timeoutMessage.style.display = 'none';
+          localStorage.removeItem('cooldownEnd');
+          startTimer(ATTEMPT_TIME);
+        } else {
+          triggerCooldown();
+        }
       }
-    }
-  }, 1000);
-}
+    }, 1000);
+  }
 
-function triggerCooldown() {
-  form.querySelectorAll('input, button').forEach(el => el.disabled = true);
-  timeoutMessage.style.display = 'block';
-  const cooldownEnd = Math.floor(Date.now() / 1000) + COOLDOWN_TIME;
-  localStorage.setItem('cooldownEnd', cooldownEnd);
-  startTimer(COOLDOWN_TIME, true);
-}
-
-function initTimer() {
-  const storedCooldown = localStorage.getItem('cooldownEnd');
-  const now = Math.floor(Date.now() / 1000);
-  if (storedCooldown && now < storedCooldown) {
+  function triggerCooldown() {
     form.querySelectorAll('input, button').forEach(el => el.disabled = true);
     timeoutMessage.style.display = 'block';
-    startTimer(storedCooldown - now, true);
-  } else {
-    localStorage.removeItem('cooldownEnd');
-    startTimer(ATTEMPT_TIME);
+    const cooldownEnd = Math.floor(Date.now() / 1000) + COOLDOWN_TIME;
+    localStorage.setItem('cooldownEnd', cooldownEnd);
+    startTimer(COOLDOWN_TIME, true);
   }
-}
 
-/* ================================
-   LOGIN LOGIC WITH UID RESTRICTION
-   ================================ */
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  loading.style.display = 'block';
-  loginMessage.style.display = 'none';
+  function initTimer() {
+    const storedCooldown = localStorage.getItem('cooldownEnd');
+    const now = Math.floor(Date.now() / 1000);
+    if (storedCooldown && now < storedCooldown) {
+      form.querySelectorAll('input, button').forEach(el => el.disabled = true);
+      timeoutMessage.style.display = 'block';
+      startTimer(storedCooldown - now, true);
+    } else {
+      localStorage.removeItem('cooldownEnd');
+      startTimer(ATTEMPT_TIME);
+    }
+  }
 
-  const email = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
-      const allowedUID = "svyMoZ8GfTUtnWT0IVja1jtn4be2";
-      if (user.user.uid === allowedUID) {
-        loginSection.style.display = 'none';
-        successSection.style.display = 'block';
-        clearInterval(timerInterval);
-      } else {
-        loginMessage.textContent = "Access denied.";
-        loginMessage.style.display = 'block';
-        auth.signOut();
-      }
-      loading.style.display = 'none';
-    })
-    .catch(error => {
-      loginMessage.textContent = "Login failed. Please try again.";
-      loginMessage.style.display = 'block';
-      loading.style.display = 'none';
-    });
-});
-
-/* ================================
-   UI HELPERS & LINK PROTECTION
-   ================================ */
-const scrollBtn = document.getElementById('scrollToTopBtn');
-window.addEventListener('scroll', () => {
-  scrollBtn.style.display = (window.scrollY > 200) ? 'block' : 'none';
-});
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function toggleFolder(id) {
-  const el = document.getElementById(id);
-  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
-}
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && ['c','v','u','s','x','a'].includes(e.key.toLowerCase())) {
+  // ================================
+  // LOGIN LOGIC WITH UID RESTRICTION
+  // ================================
+  form.addEventListener('submit', e => {
     e.preventDefault();
-  }
-});
+    loading.style.display = 'block';
+    loginMessage.style.display = 'none';
 
-function protectLinks() {
-  document.querySelectorAll('.secure-link').forEach(a => {
-    a.draggable = false;
-    a.style.userSelect = 'none';
-    a.addEventListener('click', ev => {
-      ev.preventDefault();
-      const dest = a.getAttribute('data-url');
-      if (dest) window.open(dest, '_blank', 'noopener,noreferrer');
-    });
-    a.addEventListener('auxclick', ev => {
-      if (ev.button === 1) {
+    const email = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const allowedUID = "svyMoZ8GfTUtnWT0IVja1jtn4be2";
+        if (userCredential.user.uid === allowedUID) {
+          loginSection.style.display = 'none';
+          successSection.style.display = 'block';
+          clearInterval(timerInterval);
+        } else {
+          loginMessage.textContent = "Access denied.";
+          loginMessage.style.display = 'block';
+          signOut(auth);
+        }
+        loading.style.display = 'none';
+      })
+      .catch(error => {
+        console.error("Login error:", error.code, error.message);
+        loginMessage.textContent = "Login failed. Please try again.";
+        loginMessage.style.display = 'block';
+        loading.style.display = 'none';
+      });
+  });
+
+  // ================================
+  // UI HELPERS & LINK PROTECTION
+  // ================================
+  const scrollBtn = document.getElementById('scrollToTopBtn');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = (window.scrollY > 200) ? 'block' : 'none';
+  });
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleFolder(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+  }
+
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && ['c','v','u','s','x','a'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+  });
+
+  function protectLinks() {
+    document.querySelectorAll('.secure-link').forEach(a => {
+      a.draggable = false;
+      a.style.userSelect = 'none';
+      a.addEventListener('click', ev => {
         ev.preventDefault();
         const dest = a.getAttribute('data-url');
         if (dest) window.open(dest, '_blank', 'noopener,noreferrer');
-      }
+      });
+      a.addEventListener('auxclick', ev => {
+        if (ev.button === 1) {
+          ev.preventDefault();
+          const dest = a.getAttribute('data-url');
+          if (dest) window.open(dest, '_blank', 'noopener,noreferrer');
+        }
+      });
+      a.addEventListener('dragstart', ev => ev.preventDefault());
+      a.addEventListener('copy', ev => ev.preventDefault());
+      a.addEventListener('selectstart', ev => ev.preventDefault());
     });
-    a.addEventListener('dragstart', ev => ev.preventDefault());
-    a.addEventListener('copy', ev => ev.preventDefault());
-    a.addEventListener('selectstart', ev => ev.preventDefault());
+
+    document.addEventListener('dragstart', ev => {
+      if (ev.target && ev.target.closest('.secure-link')) ev.preventDefault();
+    });
+    document.addEventListener('copy', ev => ev.preventDefault());
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    protectLinks();
+    document.querySelectorAll('.secure-link').forEach(a => {
+      a.setAttribute('href', '#');
+      a.setAttribute('role', 'link');
+      a.setAttribute('tabindex', '0');
+    });
   });
 
-  document.addEventListener('dragstart', ev => {
-    if (ev.target && ev.target.closest('.secure-link')) ev.preventDefault();
-  });
-  document.addEventListener('copy', ev => ev.preventDefault());
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  protectLinks();
-  document.querySelectorAll('.secure-link').forEach(a => {
-    a.setAttribute('href', '#');
-    a.setAttribute('role', 'link');
-    a.setAttribute('tabindex', '0');
-  });
-});
-
-window.onload = initTimer;
+  window.onload = initTimer;
 </script>
+
 
 
 </body>

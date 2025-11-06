@@ -372,12 +372,9 @@ footer { text-align:center; color:#fff; font-size:0.9rem; padding:10px; backgrou
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function toggleFolder(id) {
-  const el = document.getElementById(id);
-  if (!el) return; // Prevent errors if element doesn't exist
-
-  const isHidden = window.getComputedStyle(el).display === 'none';
-  el.style.display = isHidden ? 'block' : 'none';
+  function toggleFolder(folderId) {
+const folder = document.getElementById(folderId);
+folder.style.display = folder.style.display === 'block' ? 'none' : 'block';
 }
 
 
